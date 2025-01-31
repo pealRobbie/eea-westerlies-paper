@@ -1,0 +1,74 @@
+#!/usr/bin/bash
+#                                  # -l is necessary to initialize modules correctly!
+#SBATCH --ntasks=27                # All #SBATCH lines have to follow uninterrupted
+#SBATCH --time=01:00:00            # comments start with # and do not count as interruptions
+#SBATCH --job-name=calculate_season_class_fracs
+#SBATCH --export=NONE              # do not export environment from submitting shell
+                                   # first non-empty non-comment line ends SBATCH options
+unset SLURM_EXPORT_ENV             # enable export of environment from this script to srun
+
+source ~/.bashrc
+source activate atmos_sci
+
+# Specify the start and end years
+yearStart=1980
+yearEnd=2022
+
+# Generate an array of years from yearStart to yearEnd
+years=()
+for (( year=yearStart; year<=yearEnd; year++ )); do
+    years+=($year)
+done
+
+# Convert the array into a space-separated string
+yearArgs="${years[@]}"
+
+# Paths to locs unique to each parameter combination
+fracSavePath="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/sensitivity/full/mjoClassFracs."
+westerlyPath="/home/atuin/c104fa/c104fa10/data/westerlies/sensitivity/mf700/"
+
+## Comment me out if you don't want to generate figures
+figSavePath="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/sensitivity/full/plots/"
+
+# Paths for locs that stay the same
+swio_stateFile="/home/atuin/c104fa/c104fa10/utils/swio_state/swio_state5.csv"
+totalSaveLoc="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/sensitivity/full/mjoClassTotals.pkl"
+
+# Log path
+logDir="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/sensitivity/logs/"
+
+# Define the parameters and their possible values
+directionValues=(40 45 50)
+magnitudePercentileValues=(60 70 80)
+sizeValues=(750 1000 1500)
+
+python_script="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/calculate_season_class_fracs.py"
+
+# Run the code for each value combination
+for direction in "${directionValues[@]}"; do
+  for percentage in "${magnitudePercentileValues[@]}"; do
+    for size in "${sizeValues[@]}"; do
+
+        # Define input arguments
+        fracSaveLoc="${fracSavePath}dir.${direction}_thresh.${percentage}_size.${size}.nc"
+        westerlyLoc="${westerlyPath}/dir.${direction}_thresh.${percentage}_size.${size}/data/event."
+
+        log_file="${logDir}/log_dir.${direction}_thresh.${percentage}_size.${size}.txt"
+
+        if [ -n "$figSavePath" ]; then
+            figSaveLoc="${figSavePath}dir.${direction}_thresh.${percentage}_size.${size}"
+
+            # Call the Python program with the arguments
+            python3 $python_script --fracSaveLoc "$fracSaveLoc" --totalSaveLoc "$totalSaveLoc" --westerlyPath "$westerlyLoc" --swio_stateFile "$swio_stateFile" --years $yearArgs --calculate --figSaveLoc $figSaveLoc  > "$log_file" 2>&1 &
+        else
+            # Call the Python program with the arguments
+            python3 $python_script --fracSaveLoc "$fracSaveLoc" --totalSaveLoc "$totalSaveLoc" --westerlyPath "$westerlyLoc" --swio_stateFile "$swio_stateFile" --years $yearArgs --calculate  > "$log_file" 2>&1 &
+        fi
+    done
+  done
+done
+
+# Wait for all background processes to finish
+wait
+
+echo "Sensitivity test completed."

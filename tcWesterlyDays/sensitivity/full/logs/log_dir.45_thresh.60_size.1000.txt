@@ -1,0 +1,7 @@
+/home/atuin/c104fa/c104fa10/software/conda/envs/atmos_sci/lib/python3.9/site-packages/pyproj/__init__.py:89: UserWarning: pyproj unable to set database path.
+  _pyproj_global_context_initialize()
+Loading westerly events from 1940-2022 from /home/atuin/c104fa/c104fa10/data/westerlies/sensitivity/mf700//dir.45_thresh.60_size.1000/data/event. ... 
+Selecting points along 30E from -12-5N
+Identifying days with a westerly along the line ...
+Saving 2D data to /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/tcWesterlyDays/sensitivity/full/eventsLine2D.dir.45_thresh.60_size.1000.nc
+Saving 1D data to /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/tcWesterlyDays/sensitivity/full/eventsLine1D.dir.45_thresh.60_size.1000.csv

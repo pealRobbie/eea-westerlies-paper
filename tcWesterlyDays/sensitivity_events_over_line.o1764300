@@ -1,0 +1,31 @@
+### Starting TaskPrologue of job 1764300 on f0322 at Wed Jan 29 15:15:29 CET 2025
+#   SLURM_JOB_NODELIST=f0322
+#   SLURM_JOB_NUM_NODES=1
+#   SLURM_NTASKS=27
+#   SLURM_NPROCS=27
+#   SLURM_TASKS_PER_NODE=27
+#   SLURM_JOB_CPUS_PER_NODE=72
+#   SLURM_EXPORT_ENV=NONE
+Running on cores 0-71 with governor powersave
+### Finished TaskPrologue
+Sensitivity test completed.
+=== JOB_STATISTICS ===
+=== current date     : Wed Jan 29 16:50:50 CET 2025
+= Job-ID             : 1764300 on fritz
+= Job-Name           : sensitivity_events_over_line
+= Job-Command        : /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/tcWesterlyDays/run_sensitivity_calculate_events_over_line
+= Initial workdir    : /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/tcWesterlyDays
+= Queue/Partition    : singlenode
+= Slurm account      : c104fa with QOS=normal
+= Requested resources:  for 02:30:00
+= Elapsed runtime    : 01:35:34
+= Total RAM usage    : 56.8 GiB 
+= Node list          : f0322
+= Subm/Elig/Start/End: 2025-01-29T15:15:14 / 2025-01-29T15:15:14 / 2025-01-29T15:15:15 / 2025-01-29T16:50:49
+======================
+=== Quota infos ======
+    Path              Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/hpc           31.0G   104.9G   209.7G        N/A     447K     500K   1,000K        N/A    
+    /home/vault          0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+    /lustre              4.0K     0.0K     0.0K        N/A       1       80K     250K        N/A    
+======================

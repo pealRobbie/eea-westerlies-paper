@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+#                                  # -l is necessary to initialize modules correctly!
+#SBATCH --ntasks=1                # All #SBATCH lines have to follow uninterrupted
+#SBATCH --time=00:10:00            # comments start with # and do not count as interruptions
+#SBATCH --job-name=calculate_season_class_fracs
+#SBATCH --export=NONE              # do not export environment from submitting shell
+                                   # first non-empty non-comment line ends SBATCH options
+unset SLURM_EXPORT_ENV             # enable export of environment from this script to srun
+
+source ~/.bashrc
+source activate atmos_sci
+
+# Define input arguments
+fracSaveLoc="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/sensitivity/mjoClassFracs.dir.40_thresh.70_size.1000.nc"
+totalSaveLoc="/home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/sensitivity/mjoClassTotals.dir.40_thresh.70_size.1000.pkl"
+westerlyPath="/home/atuin/c104fa/c104fa10/data/westerlies/sensitivity/mf700/dir.50_thresh.70_size.1000/data/event."
+swio_stateFile="/home/atuin/c104fa/c104fa10/utils/swio_state/swio_state5.csv"
+
+# Specify the start and end years
+yearStart=2001
+yearEnd=2005
+
+# Generate an array of years from yearStart to yearEnd
+years=()
+for (( year=yearStart; year<=yearEnd; year++ )); do
+    years+=($year)
+done
+
+# Convert the array into a space-separated string
+yearArgs="${years[@]}"
+
+# Call the Python program with the arguments
+python3 /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/calculate_season_class_fracs.py --fracSaveLoc "$fracSaveLoc" --totalSaveLoc "$totalSaveLoc" --westerlyPath "$westerlyPath" --swio_stateFile "$swio_stateFile" --years $yearArgs
+
+

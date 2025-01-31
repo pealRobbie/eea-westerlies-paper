@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+#                                  # -l is necessary to initialize modules correctly!
+#SBATCH --ntasks=1                # All #SBATCH lines have to follow uninterrupted
+#SBATCH --time=02:00:00            # comments start with # and do not count as interruptions
+#SBATCH --job-name=events_over_line
+#SBATCH --export=NONE              # do not export environment from submitting shell
+                                   # first non-empty non-comment line ends SBATCH options
+unset SLURM_EXPORT_ENV             # enable export of environment from this script to srun
+
+source ~/.bashrc
+source activate atmos_sci
+
+python3 /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/tcWesterlyDays/events_over_line.py

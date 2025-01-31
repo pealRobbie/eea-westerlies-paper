@@ -1,0 +1,31 @@
+### Starting TaskPrologue of job 1750017 on f0686 at Mon Jan 20 15:28:18 CET 2025
+#   SLURM_JOB_NODELIST=f0686
+#   SLURM_JOB_NUM_NODES=1
+#   SLURM_NTASKS=27
+#   SLURM_NPROCS=27
+#   SLURM_TASKS_PER_NODE=27
+#   SLURM_JOB_CPUS_PER_NODE=72
+#   SLURM_EXPORT_ENV=NONE
+Running on cores 0-71 with governor powersave
+### Finished TaskPrologue
+Sensitivity test completed.
+=== JOB_STATISTICS ===
+=== current date     : Mon Jan 20 15:42:20 CET 2025
+= Job-ID             : 1750017 on fritz
+= Job-Name           : calculate_season_class_fracs
+= Job-Command        : /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays/run_sensitivity_calculate_season_class_fracs
+= Initial workdir    : /home/atuin/c104fa/c104fa10/eeaWesterliesPaper/mjoWesterlyDays
+= Queue/Partition    : singlenode
+= Slurm account      : c104fa with QOS=normal
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:14:10
+= Total RAM usage    : 115.3 GiB 
+= Node list          : f0686
+= Subm/Elig/Start/End: 2025-01-20T15:27:51 / 2025-01-20T15:27:51 / 2025-01-20T15:28:09 / 2025-01-20T15:42:19
+======================
+=== Quota infos ======
+    Path              Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/hpc           30.8G   104.9G   209.7G        N/A     446K     500K   1,000K        N/A    
+    /home/vault          0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+    /lustre              4.0K     0.0K     0.0K        N/A       1       80K     250K        N/A    
+======================
